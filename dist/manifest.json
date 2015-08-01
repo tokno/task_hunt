@@ -1,0 +1,21 @@
+{
+    "name": "Task hunt",
+    "description": "Outliner + ToDo list",
+    "version": "0.1",
+    "manifest_version": 2,
+
+    "app": {
+        "background": {
+            "scripts": [
+                "launcher.js"
+            ]
+        }
+    },
+    "sandbox": {
+        "pages": [
+            "index.html"
+        ]
+    }
+
+}
+

@@ -1,0 +1,17 @@
+{
+  "name": "task_hunt",
+  "version": "1.0.0",
+  "description": "Outline + ToDo list",
+  "author": "Takuya Okuno",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "coffee-script": "^1.9.3",
+    "coffeeify": "^1.1.0",
+    "glob": "^5.0.14",
+    "gulp": "^3.9.0",
+    "insert-css": "^0.2.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vueify": "^1.1.5"
+  }
+}

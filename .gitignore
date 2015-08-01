@@ -1,0 +1,5 @@
+/build/main.js
+/node_modules
+/dist/main.js
+/.idea
+/*.iml
