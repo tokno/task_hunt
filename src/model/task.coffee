@@ -2,7 +2,7 @@ Path = require './path'
 
 class Task
     constructor: (title) ->
-        throw "Title must\'t be empty." if !title
+        throw "Title must\'t be null." if title == null
 
         @title = title
         @parent = null
@@ -17,6 +17,16 @@ class Task
         index = @subTasks.indexOf task
         @subTasks.splice index, 1 if index != -1
         this
+
+    insertAfter: (precedingChild, newChild) ->
+        idx = @subTasks.indexOf precedingChild
+        len = @subTasks.length
+        tasks = @subTasks
+
+        throw "No sub-task #{precedingChild}." if idx == -1
+
+        newChild.parent = this
+        @subTasks = [tasks[0..idx]..., newChild, tasks[idx+1..len]...]
 
     hasSubTask: ->
         @subTasks.length

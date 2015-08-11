@@ -1,14 +1,21 @@
 <style>
+.sub-task-wrap {
+    padding-left: 30px;
+    border-left: solid 1px #ddd;
+}
+
 .task-title .pin:hover {
     cursor: pointer;
 }
 </style>
 
 <template>
-<div>
+<div id="task-node-{{task._id}}">
   <div class="task-title">
     <span class="pin" v-on="click: nodeSelected">-</span>
-    <input class="text" v-model="title" />
+    <input class="text" v-model="title"
+        v-on="keydown:newSibling | key 'enter',
+              keydown:changeHierarchy | key 'tab'" />
   </div>
 </div>
 <div class="sub-task-wrap">
@@ -24,6 +31,16 @@ module.exports =
 
     methods:
         nodeSelected: ->
-            @$dispatch "node-selected", this.task
+            @$dispatch "node-selected", @task
+
+        newSibling: (event) ->
+            @$dispatch "request-new-task-after", @task
+
+        changeHierarchy: (event) ->
+            console.log "foo"
+
+    created: ->
+        @$watch "title", =>
+            @$dispatch "task-edited", @task
 </script>
 

@@ -1,7 +1,15 @@
 <style>
-.sub-task-wrap {
+.task-root > .sub-task-wrap {
     padding-left: 30px;
-    border-left: solid 1px #ddd;
+    border-left: none;
+}
+
+.new-top-level-task {
+    color: #999;
+}
+
+.new-top-level-task:hover {
+    cursor: pointer;
 }
 </style>
 
@@ -12,6 +20,9 @@
   </div>
   <div class="sub-task-wrap">
     <task-node v-repeat="subTasks"></task-node>
+  </div>
+  <div v-if="isEmpty">
+    <span class="new-top-level-task" v-on="click: plusButtonClicked">+</span>
   </div>
 </div>
 </template>
@@ -33,5 +44,12 @@ module.exports =
 
         subTasks: ->
             @rootTask?.subTasks
+
+        isEmpty: ->
+            !@rootTask?.hasSubTask()
+
+    methods:
+        plusButtonClicked: ->
+            @$dispatch "new-subtask", @rootTask
 </script>
 
