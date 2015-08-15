@@ -4,7 +4,24 @@ li {
 }
 
 .task-list {
-    margin-left: 30px;
+    margin-left: 10px;
+}
+
+.task-list-item {
+    margin: 15px 0;
+    padding: 5px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.task-list-item .path {
+    font-size: 60%;
+    color: #666;
+}
+
+.task-list-item .task-title {
+    width: calc(100% - 2px);
+    margin: 2px;
 }
 </style>
 
@@ -13,8 +30,9 @@ li {
   <span>タスク一覧</span>
 </div>
 <ul class="task-list">
-  <li v-repeat="task: tasks">
-    <input type="text" v-model="task.title" />
+  <li class="task-list-item" v-repeat="task: tasks">
+    <div class="path" v-text="task.getPath().trancateTail()"></div>
+    <input class="task-title" type="text" v-model="task.title" />
   </li>
 </ul>
 </template>

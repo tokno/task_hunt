@@ -4,6 +4,14 @@
     border-left: solid 1px #ddd;
 }
 
+.task-title .pin {
+    width: 1rem;
+}
+
+.task-title .text {
+    width: calc(100% - 1rem);
+}
+
 .task-title .pin:hover {
     cursor: pointer;
 }
