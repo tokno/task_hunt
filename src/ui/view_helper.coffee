@@ -3,6 +3,7 @@ module.exports =
 
     focusTaskNodeNextTick: (task) ->
         @vue.nextTick ->
-            document.querySelector "#task-node-#{task._id} input"
-                .focus()
+            selector = "#task-node-#{task._id} input"
+            element = document.querySelector selector
+            element?.focus()
 

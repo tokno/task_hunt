@@ -40,7 +40,18 @@ appVm.$on "request-new-task-after", (task) ->
 # タスク削除
 appVm.$on "delete-request", (task) ->
     service.deleteTask(task).then ->
+        # TODO 一つ上のタスクにフォーカス
         console.log "task deleted"
+
+# タスクを上方向に移動
+appVm.$on "request-task-up", (task) ->
+    service.taskHierarchyUp(task).then =>
+        viewHelper.focusTaskNodeNextTick task
+
+# タスクを下方向に移動
+appVm.$on "request-task-down", (task) ->
+    service.taskHierarchyDown(task).then =>
+        viewHelper.focusTaskNodeNextTick task
 
 # 編集されたら保存
 appVm.$on "task-edited", (task) ->
@@ -52,5 +63,4 @@ window.onload = ->
         rootTask = root
         appVm.bindModel root
         appVm.$mount "#task-hunt-app"
-
 

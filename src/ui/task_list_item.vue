@@ -34,6 +34,8 @@ li {
 
 .task-list-item .task-title {
     width: calc(100% - 2px);
+    font-size: 100%;
+    margin: 10px;
 }
 
 .task-list-item .memo-wrap {

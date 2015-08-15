@@ -17,6 +17,7 @@ class Task
 
 
     removeChild: (task) ->
+        task.parent = null
         index = @subTasks.indexOf task
         @subTasks.splice index, 1 if index != -1
         this
