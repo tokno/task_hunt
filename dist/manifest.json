@@ -5,17 +5,11 @@
     "manifest_version": 2,
 
     "app": {
-        "background": {
-            "scripts": [
-                "launcher.js"
-            ]
+        "launch": {
+            "local_path": "index.html"
         }
     },
-    "sandbox": {
-        "pages": [
-            "index.html"
-        ]
-    }
 
+    "content_security_policy": "script-src 'self' 'unsafe-eval' chrome-extension-resource:; object-src 'self'"
 }
 
