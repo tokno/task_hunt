@@ -15,7 +15,8 @@
     <span class="pin" v-on="click: nodeSelected">-</span>
     <input class="text" v-model="title"
         v-on="keydown:newSibling | key 'enter',
-              keydown:changeHierarchy | key 'tab'" />
+              keydown:changeHierarchy | key 'tab',
+              keydown:onBackKey | key '8'" />
   </div>
 </div>
 <div class="sub-task-wrap">
@@ -38,6 +39,9 @@ module.exports =
 
         changeHierarchy: (event) ->
             console.log "foo"
+
+        onBackKey: (event) ->
+            @$dispatch "delete-request", @task if !@task.title
 
     created: ->
         @$watch "title", =>

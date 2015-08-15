@@ -34,7 +34,6 @@ input {
 }
 
 #content-wrap {
-    width: 100%;
     height: calc(100% - 35px);
     margin: 0 25px;
     padding: 0 15px;

@@ -34,7 +34,12 @@ appVm.$on "request-new-task-after", (task) ->
     service.createNewTask(task).then (newTask) ->
         viewHelper.focusTaskNodeNextTick newTask
 
-# 編集されたらすぐ保存
+# タスク削除
+appVm.$on "delete-request", (task) ->
+    service.deleteTask(task).then ->
+        console.log "task deleted"
+
+# 編集されたら保存
 appVm.$on "task-edited", (task) ->
     repository.save task
 

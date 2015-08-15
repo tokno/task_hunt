@@ -3,6 +3,7 @@ Task = require '../model/task'
 class TaskService
     taskRepository: null
 
+
     createNewSubTask: (rootTask) ->
         new Promise (resolve, reject) =>
             task = new Task ""
@@ -16,6 +17,7 @@ class TaskService
                 @taskRepository.save task
             .then =>
                 resolve task
+
 
     createNewTask: (precedingTask) ->
         new Promise (resolve, reject) =>
@@ -32,6 +34,14 @@ class TaskService
                 @taskRepository.save newTask
             .then =>
                 resolve newTask
+
+
+    deleteTask: (task) ->
+        task.parent.removeChild task if task.parent
+
+        new Promise (resolve, reject) =>
+            @taskRepository.deleteTask(task).then =>
+                resolve()
 
 
 

@@ -57,5 +57,11 @@ class TaskRepository extends IndexedDBRepository
         @saveToStore "task-store", @transform.objectToEntiry task
 
 
+    deleteTask: (task) ->
+        new Promise (resolve, reject) =>
+            @delete("task-store", task._id).then =>
+                resolve()
+
+
 module.exports = TaskRepository
 
