@@ -35,6 +35,18 @@ li {
 .task-list-item .task-title {
     width: calc(100% - 2px);
 }
+
+.task-list-item .memo-wrap {
+    background-color: #fafafa;
+    box-shadow: 0px 0px 0px 1px #ddd inset;
+}
+
+.task-list-item .memo {
+    font-size: 75%;
+    white-space: pre;
+    font-family: monospace;
+    margin: 5px;
+}
 </style>
 
 <template>
@@ -42,10 +54,15 @@ li {
   <div class="list-item-header">
     <div class="path" v-text="task.getPath().trancateTail()"></div>
     <div class="ops">
-      <img class="memo-button" v-on="click:toggleMemo(task)" src="icon/memo.svg" alt="memo" />
+      <img v-if="!memoAdded" class="memo-button" v-on="click:addMemo" src="icon/memo.svg" alt="memo" />
     </div>
   </div>
-  <input class="task-title" type="text" v-model="task.title" />
+  <div>
+    <input class="task-title" type="text" v-model="task.title" />
+  </div>
+  <div v-if="memoAdded" class="memo-wrap">
+    <pre class="memo" v-editable-text="task.memo" contenteditable></pre>
+  </div>
 </li>
 </template>
 
@@ -56,7 +73,13 @@ module.exports =
             @$data
 
     methods:
-        toggleMemo: (task) ->
-            console.log task
+        addMemo: ->
+            @memoAdded = true
+
+    created: ->
+        @$add "memoAdded", @task.memo
+        @$watch "memo", ->
+            @$dispatch "task-edited", @task
+
 </script>
 

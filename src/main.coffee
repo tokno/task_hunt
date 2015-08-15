@@ -4,6 +4,9 @@ TaskService = require './service/task_service'
 
 Vue.config.debug = true
 
+customDirectives = require './vue_custom_directives'
+customDirectives.register Vue
+
 viewHelper = require './ui/view_helper'
 viewHelper.vue = Vue
 

@@ -5,6 +5,7 @@ class Task
         throw "Title must\'t be null." if title == null
 
         @title = title
+        @memo = ""
         @parent = null
         @subTasks = []
 

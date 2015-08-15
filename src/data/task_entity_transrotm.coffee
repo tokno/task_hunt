@@ -5,12 +5,14 @@ class TaskEntityTransform
         id: task._id
         title: task.title
         parentId: task.parent?._id
+        memo: task.memo
 
 
     entityToObject: (entity) ->
         task = new Task entity.title
         task._id = entity.id
         task.parentId = entity.parentId
+        task.memo = entity.memo
         task
 
 
