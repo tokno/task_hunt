@@ -1,6 +1,6 @@
 <style>
 .task-root > .sub-task-wrap {
-    padding-left: 30px;
+    padding-left: 10px;
     border-left: none;
 }
 

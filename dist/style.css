@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     outline-color: #fff;
+    cursor: default;
 }
 
 html {
@@ -16,8 +17,9 @@ html, body, #container {
 
 input {
     border: none;
-    padding: 2px;
     font-size: 70%;
+    line-height: 1.2em;
+    cursor: text;
 }
 
 #header-wrap {
@@ -40,6 +42,14 @@ input {
     display: flex;
 }
 
+#vertical-divider {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #999;
+    margin: 5px 10px;
+}
+
 #path-view {
     margin: 10px 25px;
     padding: 0 15px;
@@ -48,12 +58,12 @@ input {
 }
 
 #tree-view {
-    width: 50%;
-    font-size: 90%;
+    width: calc(35% - 5px);
+    font-size: 70%;
 }
 
 #list-view {
-    width: 50%;
+    width: 65%;
     font-size: 90%;
 }
 

@@ -1,6 +1,6 @@
 <style>
 .sub-task-wrap {
-    padding-left: 30px;
+    padding-left: 20px;
     border-left: solid 1px #ddd;
 }
 
