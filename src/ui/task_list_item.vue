@@ -5,7 +5,7 @@ li {
 
 .task-list-item {
     margin: 15px 0;
-    padding: 5px 10px;
+    padding: 5px 10px 7px;
     border: 1px solid #aaa;
     border-radius: 5px;
 }
@@ -39,8 +39,10 @@ li {
 }
 
 .task-list-item .memo-wrap {
+    padding: 5px;
     background-color: #fafafa;
     box-shadow: 0px 0px 0px 1px #ddd inset;
+    border-radius: 4px;
 }
 
 .task-list-item .memo {
