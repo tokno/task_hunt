@@ -26,9 +26,10 @@ module.exports =
 
         path: ->
             @viewPoint?.getPath()
+                .trancateTail 1
 
         entries: ->
-            @viewPoint?.getPath().entries
+            @path?.entries
 
     methods:
         entrySelected: (entry) ->

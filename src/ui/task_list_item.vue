@@ -1,8 +1,4 @@
 <style>
-li {
-    list-style-type: none;
-}
-
 .task-list-item {
     margin: 15px 0;
     padding: 5px 10px 7px;
@@ -56,7 +52,7 @@ li {
 <template>
 <li class="task-list-item">
   <div class="list-item-header">
-    <div class="path" v-text="task.getPath().trancateTail()"></div>
+    <div class="path" v-text="pathString"></div>
     <div class="ops">
       <img v-if="!memoAdded" class="memo-button" v-on="click:addMemo" src="icon/memo.svg" alt="memo" />
     </div>
@@ -75,6 +71,13 @@ module.exports =
     computed:
         task: ->
             @$data
+
+        pathString: ->
+            viewPoint = @$root.viewPoint
+            @task.getPath()
+                .behind viewPoint
+                .prepend viewPoint
+                .trancateTail 1
 
     methods:
         addMemo: ->

@@ -22,6 +22,10 @@ input {
     cursor: text;
 }
 
+li {
+    list-style-type: none;
+}
+
 #task-hunt-app {
     height: 100%;
 }
