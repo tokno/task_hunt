@@ -10,11 +10,11 @@ customDirectives.register Vue
 viewHelper = require './ui/view_helper'
 viewHelper.vue = Vue
 
-window.repository = new TaskRepository
+window.taskRepository = new TaskRepository
 window.service = new TaskService
 rootTask = null
 
-service.taskRepository = repository
+service.taskRepository = taskRepository
 
 # アプリケーションViewModel
 window.appVm = new Vue require './ui/app.vue'
@@ -39,6 +39,8 @@ appVm.$on "request-new-task-after", (task) ->
 
 # タスク削除
 appVm.$on "delete-request", (task) ->
+    return if task.hasSubTask()
+
     service.deleteTask(task).then ->
         # TODO 一つ上のタスクにフォーカス
         console.log "task deleted"
@@ -54,13 +56,17 @@ appVm.$on "request-task-down", (task) ->
         viewHelper.focusTaskNodeNextTick task
 
 # 編集されたら保存
-appVm.$on "task-edited", (task) ->
-    repository.save task
+appVm.$on "task-changed", (task) ->
+    taskRepository.saveTask task
 
 
 window.onload = ->
-    repository.loadRootTask().then (root) ->
+    taskRepository.loadRootTask().then (root) ->
         rootTask = root
         appVm.bindModel root
         appVm.$mount "#task-hunt-app"
+
+
+window.onerror = (msg, url, line, col, error) ->
+    alert msg
 

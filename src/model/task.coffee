@@ -9,6 +9,9 @@ class Task
         @parent = null
         @subTasks = []
 
+        @priority = @Priority.Low
+        @state = @State.ToDo
+
 
     addChild: (task) ->
         @subTasks.push task
@@ -17,9 +20,9 @@ class Task
 
 
     removeChild: (task) ->
-        task.parent = null
         index = @subTasks.indexOf task
         @subTasks.splice index, 1 if index != -1
+        task.parent = null
         this
 
 
@@ -77,6 +80,18 @@ class Task
 
     toString: ->
         @title
+
+
+Task::Priority =
+    High: "high"
+    Normal: "normal"
+    Low: "low"
+
+
+Task::State =
+    ToDo: "todo"
+    Doing: "doing"
+    Done: "done"
 
 
 module.exports = Task

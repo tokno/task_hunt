@@ -1,9 +1,13 @@
 <style>
 .task-list-item {
-    margin: 15px 0;
+    margin: 15px 5px;
     padding: 5px 10px 7px;
     border: 1px solid #aaa;
     border-radius: 5px;
+}
+
+.task-list-item:hover {
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
 }
 
 .task-list-item > .list-item-header {
@@ -29,7 +33,7 @@
 }
 
 .task-list-item .task-title {
-    width: calc(100% - 2px);
+    width: calc(100% - 22px);
     font-size: 100%;
     margin: 10px;
 }
@@ -46,15 +50,17 @@
     white-space: pre;
     font-family: monospace;
     margin: 5px;
+    cursor: text;
 }
 </style>
 
 <template>
-<li class="task-list-item">
+<li class="task-list-item" v-on="mouseover:hovered, mouseleave:leaved">
   <div class="list-item-header">
     <div class="path" v-text="pathString"></div>
     <div class="ops">
-      <img v-if="!memoAdded" class="memo-button" v-on="click:addMemo" src="icon/memo.svg" alt="memo" />
+      <img v-if="!memoAdded" class="memo-button" v-on="click:addMemo"
+            src="icon/memo.svg" alt="memo" />
     </div>
   </div>
   <div>
@@ -74,6 +80,12 @@ module.exports =
 
         pathString: ->
             viewPoint = @$root.viewPoint
+
+            # Rootから現在のタスクまでのパス。
+            #
+            # Root: task1, Task: task3 の場合、
+            #     before: / Home / task1 / task2 / task3
+            #     after: / task1 / task2
             @task.getPath()
                 .behind viewPoint
                 .prepend viewPoint
@@ -83,10 +95,16 @@ module.exports =
         addMemo: ->
             @memoAdded = true
 
+        hovered: (event) ->
+            @$dispatch "task-list-item-hover", @task, true
+
+        leaved: (event) ->
+            @$dispatch "task-list-item-hover", @task, false
+
     created: ->
         @$add "memoAdded", @task.memo
         @$watch "memo", ->
-            @$dispatch "task-edited", @task
+            @$dispatch "task-changed", @task
 
 </script>
 

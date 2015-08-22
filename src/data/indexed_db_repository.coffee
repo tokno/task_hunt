@@ -64,7 +64,7 @@ class IndexedDBRepository
         new Promise (resolve, reject) =>
             request = indexedDB.deleteDatabase @scheme.database
             request.onsuccess = -> resolve
-            request.onerror = -> reject
+            request.onerror = -> reject()
 
 
     getList: (storeName) ->

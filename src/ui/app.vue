@@ -6,14 +6,18 @@ module.exports =
         pathView: require './path_view.vue'
 
     data:
-        model: null
         viewPoint: null
+
 
     methods:
         bindModel: (taskTreeRoot) ->
-            @model = @viewPoint = taskTreeRoot
+            @viewPoint = taskTreeRoot
 
         changeRoot: (newRoot) ->
             @viewPoint = newRoot
+
+    created: ->
+        @$on "task-list-item-hover", (task, hover) =>
+            @$broadcast "task-list-item-hover", task, hover
 </script>
 

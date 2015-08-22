@@ -7,12 +7,19 @@ class TaskEntityTransform
         parentId: task.parent?._id
         memo: task.memo
 
+        priority: task.priority
+        state: task.state
+
 
     entityToObject: (entity) ->
         task = new Task entity.title
         task._id = entity.id
         task.parentId = entity.parentId
         task.memo = entity.memo
+
+        task.priority = entity.priority || Task::Priority.Low
+        task.state = entity.state || Task::State.ToDo
+
         task
 
 

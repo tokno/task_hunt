@@ -22,7 +22,7 @@ class TaskRepository extends IndexedDBRepository
     onDatabaseUpgraded: ->
         # ルートタスクの登録
         new Promise (resolve, reject) =>
-            @save
+            @saveTask
                 title: "Home"
             .then ->
                 resolve()
@@ -53,7 +53,7 @@ class TaskRepository extends IndexedDBRepository
                 resolve root
 
 
-    save: (task) ->
+    saveTask: (task) ->
         @saveToStore "task-store", @transform.objectToEntiry task
 
 

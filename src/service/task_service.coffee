@@ -11,11 +11,11 @@ saveAll = (taskRepository, tasks) ->
         if tasks.length == 0
             resolve()
         else if tasks.length == 1
-            taskRepository.save tasks[0]
+            taskRepository.saveTask tasks[0]
             .then =>
                 resolve()
         else
-            taskRepository.save tasks[0]
+            taskRepository.saveTask tasks[0]
             .then =>
                 saveAll taskRepository, tasks[1..-1]
             .then =>
@@ -31,12 +31,12 @@ class TaskService
             task = new Task ""
 
             # ViewModelでidを使用するため、サブタスクに登録する前に保存する
-            @taskRepository.save(task).then (key) =>
+            @taskRepository.saveTask(task).then (key) =>
                 task._id = key # TODO repositoryに移動
                 rootTask.addChild task
                 Promise.resolve()
             .then =>
-                @taskRepository.save task
+                @taskRepository.saveTask task
             .then =>
                 resolve task
 
@@ -48,12 +48,12 @@ class TaskService
             throw "task has no parent." unless parent
 
             newTask = new Task ""
-            @taskRepository.save(newTask).then (key) =>
+            @taskRepository.saveTask(newTask).then (key) =>
                 newTask._id = key # TODO repositoryに移動
                 parent.insertAfter precedingTask, newTask
                 Promise.resolve()
             .then =>
-                @taskRepository.save newTask
+                @taskRepository.saveTask newTask
             .then =>
                 resolve newTask
 
@@ -85,7 +85,7 @@ class TaskService
 
         # 保存
         new Promise (resolve, reject) =>
-            @taskRepository.save(task).then =>
+            @taskRepository.saveTask(task).then =>
                 saveAll @taskRepository, followingCiblings
             .then =>
                 resolve()
@@ -102,7 +102,7 @@ class TaskService
         newParent.addChild task
 
         # 保存
-        @taskRepository.save task
+        @taskRepository.saveTask task
 
 
 module.exports = TaskService

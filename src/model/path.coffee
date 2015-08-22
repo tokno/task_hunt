@@ -34,6 +34,9 @@ class Path
 
         newPath
 
+    size: ->
+        @entries.length
+
     toString: ->
         @entries.join @divider
 
