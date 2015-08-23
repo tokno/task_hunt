@@ -19,8 +19,8 @@ class TaskRepository extends IndexedDBRepository
     transform: new TaskEntityTransform
 
 
+    # ルートタスクの登録
     onDatabaseUpgraded: ->
-        # ルートタスクの登録
         new Promise (resolve, reject) =>
             @saveTask
                 title: "Home"
@@ -28,33 +28,21 @@ class TaskRepository extends IndexedDBRepository
                 resolve()
 
 
-    # XXX タスクの親子関係は設定されない。削除予定
-    find: (id) ->
-        new Promise (resolve, reject) =>
-            @openReadonlyStore("task-store").then (store) ->
-                request = store.get id
-                request.onsuccess = (event) =>
-                    task = event.target.result
-                    resolve @transform.entityToObject task
-
-
-    # XXX タスクの親子関係は設定されない。削除予定
-    getAllTasks: ->
-        new Promise (resolve, reject) =>
-            @getList("task-store").then (taskList) =>
-                resolve taskList.map (task) =>
-                    @transform.entityToObject task
-
-
     loadRootTask: ->
         new Promise (resolve, reject) =>
-            @getAllTasks().then (tasks) =>
+            @getList "task-store"
+            .then (taskList) =>
+                tasks = taskList.map @transform.entityToObject
                 root = @transform.buildTaskTree tasks
                 resolve root
 
 
     saveTask: (task) ->
-        @saveToStore "task-store", @transform.objectToEntiry task
+        new Promise (resolve, reject) =>
+            @saveToStore "task-store", @transform.objectToEntiry task
+            .then (key) =>
+                task._id = key if task._id == undefined
+                resolve task
 
 
     deleteTask: (task) ->

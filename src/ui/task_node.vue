@@ -122,7 +122,6 @@ module.exports =
             @$dispatch "task-changed", @task
 
         @$on "task-list-item-hover", (task, hover) =>
-            console.log task.title + " " + hover
             @highlight = hover if @task == task
 </script>
 

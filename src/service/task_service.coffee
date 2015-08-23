@@ -26,13 +26,13 @@ class TaskService
     taskRepository: null
 
 
+    # 引数のタスクに子タスクを作成する。
     createNewSubTask: (rootTask) ->
         new Promise (resolve, reject) =>
             task = new Task ""
 
             # ViewModelでidを使用するため、サブタスクに登録する前に保存する
             @taskRepository.saveTask(task).then (key) =>
-                task._id = key # TODO repositoryに移動
                 rootTask.addChild task
                 Promise.resolve()
             .then =>
@@ -41,6 +41,7 @@ class TaskService
                 resolve task
 
 
+    # タスクを作成し、引数の次の位置に挿入する。
     createNewTask: (precedingTask) ->
         new Promise (resolve, reject) =>
             parent = precedingTask.parent
@@ -49,7 +50,6 @@ class TaskService
 
             newTask = new Task ""
             @taskRepository.saveTask(newTask).then (key) =>
-                newTask._id = key # TODO repositoryに移動
                 parent.insertAfter precedingTask, newTask
                 Promise.resolve()
             .then =>
@@ -58,6 +58,7 @@ class TaskService
                 resolve newTask
 
 
+    # タスク削除
     deleteTask: (task) ->
         task.parent.removeChild task if task.parent
 
@@ -66,6 +67,7 @@ class TaskService
                 resolve()
 
 
+    # 引数のタスクの位置を1つ浅くする
     taskHierarchyUp: (task) ->
         return Promise.resolve() unless task.parent?.parent
 
@@ -91,6 +93,7 @@ class TaskService
                 resolve()
 
 
+    # 引数タスクの位置を1つ深くする
     taskHierarchyDown: (task) ->
         # 直前の兄弟タスクが次の親になる
         newParent = task.prevSibling()

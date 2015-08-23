@@ -1,5 +1,6 @@
 # XXX ネストしたkeyPathには対応していない
 class IndexedDBRepository
+    # IndexedDBをオープン
     openDatabase: ->
         new Promise (resolve, reject) =>
             request = indexedDB.open @scheme.database, @scheme.version
