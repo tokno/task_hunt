@@ -1,5 +1,6 @@
 /build/main.js
 /node_modules
+/bower_components
 /dist/main.js
 /.idea
 /*.iml

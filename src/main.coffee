@@ -1,4 +1,4 @@
-Vue = require './vendor/vue'
+Vue = require '../bower_components/vue/dist/vue.js'
 TaskRepository = require './data/task_repository'
 TaskService = require './service/task_service'
 
