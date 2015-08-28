@@ -4,6 +4,10 @@
     border-left: solid 1px #ddd;
 }
 
+.task-node {
+    margin: 2px 0;
+}
+
 .task-title .pin {
     width: 1rem;
 }
@@ -17,8 +21,22 @@
 }
 
 .task-title {
+    height: 1.2em;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 5px;
+}
+
+.status-text-wrap {
+    margin-left: 1em;
+}
+
+.status-text {
+    height: 1em;
+    line-height: 1em;
+    font-size: 60%;
+    white-space: pre-wrap;
+    color: rgba(0, 0, 0, .7);
+    overflow: hidden;
 }
 
 .task-title.highlight {
@@ -59,6 +77,9 @@
               keydown:onTabKey | key 'tab',
               keydown:onBackKey | key '8'" />
   </div>
+  <div class="status-text-wrap">
+    <div v-if="statusText" class="status-text">{{statusText}}</div>
+  </div>
 </div>
 <div class="sub-task-wrap">
   <task-node v-repeat="subTasks"></task-node>
@@ -69,6 +90,7 @@
 Task = require '../model/task'
 Priority = Task::Priority
 
+# 次の優先度を返す
 nextPriority = (current) ->
     priorities = [
         Priority.Low
@@ -91,6 +113,10 @@ module.exports =
             @task.getPath()
                 .behind @$root.viewPoint
                 .size()
+
+        # memoの1行目をステータスとして表示
+        statusText: ->
+            @task.memo.split("\n")[0]?.trim()
 
     methods:
         nodeSelected: ->

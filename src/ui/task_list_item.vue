@@ -34,8 +34,9 @@
 
 .task-list-item .task-title {
     width: calc(100% - 22px);
-    font-size: 100%;
-    margin: 10px;
+    font-size: 85%;
+    font-weight: bolder;
+    margin: 5px;
 }
 
 .task-list-item .memo-wrap {
@@ -46,7 +47,7 @@
 }
 
 .task-list-item .memo {
-    font-size: 75%;
+    font-size: 70%;
     white-space: pre;
     font-family: monospace;
     margin: 5px;
@@ -67,7 +68,7 @@
     <input class="task-title" type="text" v-model="task.title" />
   </div>
   <div v-if="memoAdded" class="memo-wrap">
-    <pre class="memo" v-editable-text="task.memo" contenteditable></pre>
+    <pre class="memo" v-editable-text="task.memo" contenteditable="plaintext-only"></pre>
   </div>
 </li>
 </template>

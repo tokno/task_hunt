@@ -45,7 +45,7 @@ li {
 
 #content-wrap {
     height: calc(100% - 35px -  45px - 2px);
-    margin: 0 25px;
+    margin: 0 15px;
     padding: 0 15px;
     display: flex;
 }
@@ -60,7 +60,7 @@ li {
 
 #path-view {
     height: 25px;
-    margin: 10px 25px;
+    margin: 10px 15px;
     padding: 0 15px;
     border-bottom: solid 1px #ddd;
     font-size: 0.7rem;
@@ -69,14 +69,14 @@ li {
 #tree-view {
     width: calc(35% - 5px);
     height: 100%;
-    font-size: 80%;
+    font-size: 75%;
     overflow: scroll;
 }
 
 #list-view {
     width: 65%;
     height: 100%;
-    font-size: 90%;
+    font-size: 80%;
     overflow: scroll;
 }
 
