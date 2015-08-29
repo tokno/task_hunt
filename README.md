@@ -1,6 +1,6 @@
 アウトラインプロセッサ + メモ機能付きToDoリスト。
 ---------------------------------------------
-Vue.js と CoffeeScript で作る Chrome application。
+Vue.js、CoffeeScript、Electron で作るタスク管理ツール。
 
 ---
 

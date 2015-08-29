@@ -28,3 +28,8 @@ gulp.task 'default', [
     'build-main'
 ]
 
+
+gulp.task 'launch', [ 'build-main' ], ->
+    electron = "node_modules/.bin/electron"
+    exec "#{electron} ."
+
